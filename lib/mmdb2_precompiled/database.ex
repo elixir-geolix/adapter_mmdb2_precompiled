@@ -26,13 +26,28 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
             |> Macro.escape()
 
           quote do
-            def lookup_result(unquote(pointer)), do: unquote(lookup_result)
+            defp lookup_result(unquote(pointer)), do: unquote(lookup_result)
           end
         end)
 
       Module.eval_quoted(__ENV__, results)
 
-      def lookup_result(_), do: nil
+      defp lookup_result(_), do: nil
+
+      meta_quoted = Macro.escape(meta)
+      tree_quoted = Macro.escape(tree)
+
+      Module.eval_quoted(
+        __ENV__,
+        quote do
+          def lookup(ip) do
+            case MMDB2Decoder.find_pointer(ip, unquote(meta_quoted), unquote(tree_quoted)) do
+              {:ok, pointer} -> lookup_result(pointer)
+              _ -> nil
+            end
+          end
+        end
+      )
     end
   end
 
