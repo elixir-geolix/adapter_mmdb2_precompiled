@@ -21,6 +21,18 @@ defmodule Geolix.Adapter.MMDB2Precompiled.DatabaseTest do
            |> TestDatabase.lookup_result() == %{"type" => "test"}
   end
 
+  test "has fallback method for missing pointers" do
+    defmodule FallbackDatabase do
+      alias Geolix.Adapter.MMDB2Precompiled.Database
+      alias Geolix.TestData
+
+      use Database, source: TestData.file(:mmdb2, "Geolix.mmdb")
+    end
+
+    refute FallbackDatabase.lookup_result(:invalid)
+    refute FallbackDatabase.lookup_result(12_345_678_901_234_567_890)
+  end
+
   test "raises for invalid source files" do
     assert_raise File.Error, fn ->
       defmodule RaiseOnMissingFile do

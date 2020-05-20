@@ -31,6 +31,8 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
         end)
 
       Module.eval_quoted(__ENV__, results)
+
+      def lookup_result(_), do: nil
     end
   end
 
