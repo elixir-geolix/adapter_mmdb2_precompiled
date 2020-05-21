@@ -5,11 +5,18 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
 
   use Bitwise, only_operators: true
 
-  defmacro __using__(source: source) do
-    quote bind_quoted: [source: source], location: :keep do
-      alias Geolix.Adapter.MMDB2Precompiled.Database
+  @mmdb2_opts_default Macro.escape(%{
+                        double_precision: 8,
+                        float_precision: 4,
+                        map_keys: :strings
+                      })
 
-      @mmdb2_opts %{double_precision: 8, float_precision: 4, map_keys: :strings}
+  defmacro __using__(opts) do
+    source = opts[:source]
+    mmdb2_opts = opts[:mmdb2_decoder_options] || @mmdb2_opts_default
+
+    quote bind_quoted: [mmdb2_opts: mmdb2_opts, source: source], location: :keep do
+      alias Geolix.Adapter.MMDB2Precompiled.Database
 
       {:ok, meta, tree, data} =
         source
@@ -22,7 +29,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
         |> Enum.map(fn pointer ->
           lookup_result =
             pointer
-            |> MMDB2Decoder.lookup_pointer!(data, @mmdb2_opts)
+            |> MMDB2Decoder.lookup_pointer!(data, mmdb2_opts)
             |> Macro.escape()
 
           quote do
