@@ -1,14 +1,14 @@
 defmodule Geolix.Adapter.MMDB2Precompiled.DatabaseTest do
   use ExUnit.Case, async: true
 
+  alias Geolix.Adapter.MMDB2Precompiled.Database
+  alias Geolix.TestData
+
+  defmodule TestDatabase do
+    use Database, source: TestData.file(:mmdb2, "Geolix.mmdb")
+  end
+
   test "read and compile database" do
-    defmodule TestDatabase do
-      alias Geolix.Adapter.MMDB2Precompiled.Database
-      alias Geolix.TestData
-
-      use Database, source: TestData.file(:mmdb2, "Geolix.mmdb")
-    end
-
     assert TestDatabase.lookup({1, 1, 1, 1}) == %{"type" => "test"}
     refute TestDatabase.lookup({255, 255, 255, 255})
   end
