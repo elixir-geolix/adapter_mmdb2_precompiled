@@ -9,12 +9,14 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
       name: "Geolix Adapter: MMDB2 Precompiled",
       version: "0.1.0-dev",
       elixir: "~> 1.7",
+      aliases: aliases(),
       deps: deps(),
       description: "Compile-Time MMDB2 adapter for Geolix",
       dialyzer: dialyzer(),
       docs: docs(),
       package: package(),
       preferred_cli_env: [
+        "bench.lookup": :bench,
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.travis": :test
@@ -23,13 +25,20 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
     ]
   end
 
+  defp aliases() do
+    [
+      "bench.lookup": ["run bench/lookup.exs"]
+    ]
+  end
+
   defp deps do
     [
+      {:benchee, "~> 1.0", only: :bench, runtime: false},
       {:credo, "~> 1.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.12.0", only: :test, runtime: false},
-      {:geolix_testdata, "~> 0.5.0", only: :test, runtime: false},
+      {:geolix_testdata, "~> 0.5.0", only: [:bench, :test], runtime: false},
       {:mmdb2_decoder, "~> 3.0"}
     ]
   end
