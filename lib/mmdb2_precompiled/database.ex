@@ -47,6 +47,10 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
       Module.eval_quoted(
         __ENV__,
         quote do
+          @doc """
+          Looks for an IP address and returns the database information if found.
+          """
+          @spec lookup(:inet.ip_address()) :: map | nil
           def lookup(ip) do
             case MMDB2Decoder.find_pointer(ip, unquote(meta_quoted), unquote(tree_quoted)) do
               {:ok, pointer} -> lookup_result(pointer)
@@ -54,6 +58,10 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
             end
           end
 
+          @doc """
+          Returns the metadata information for the database.
+          """
+          @spec metadata() :: %MMDB2Decoder.Metadata{}
           def metadata, do: unquote(meta_quoted)
         end
       )
