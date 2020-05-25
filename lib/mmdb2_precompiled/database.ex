@@ -53,6 +53,8 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
               _ -> nil
             end
           end
+
+          def metadata, do: unquote(meta_quoted)
         end
       )
     end

@@ -19,6 +19,8 @@ defmodule Geolix.Adapter.MMDB2Precompiled.DatabaseTest do
   end
 
   test "read and compile database" do
+    assert %MMDB2Decoder.Metadata{database_type: "Geolix"} = TestDatabase.metadata()
+
     assert TestDatabase.lookup({1, 1, 1, 1}) == %{"type" => "test"}
     refute TestDatabase.lookup({255, 255, 255, 255})
   end
