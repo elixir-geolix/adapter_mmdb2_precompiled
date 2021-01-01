@@ -18,8 +18,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
       preferred_cli_env: [
         "bench.lookup": :bench,
         coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.travis": :test
+        "coveralls.detail": :test
       ],
       test_coverage: [tool: ExCoveralls]
     ]
@@ -51,7 +50,9 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
         :race_conditions,
         :underspecs,
         :unmatched_returns
-      ]
+      ],
+      plt_core_path: "plts",
+      plt_file: {:no_warn, "plts/dialyzer.plt"}
     ]
   end
 
