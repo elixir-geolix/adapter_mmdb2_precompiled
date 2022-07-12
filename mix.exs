@@ -2,12 +2,13 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
   use Mix.Project
 
   @url_github "https://github.com/elixir-geolix/adapter_mmdb2_precompiled"
+  @version "0.1.0-dev"
 
   def project do
     [
       app: :geolix_adapter_mmdb2_precompiled,
       name: "Geolix Adapter: MMDB2 Precompiled",
-      version: "0.1.0-dev",
+      version: @version,
       elixir: "~> 1.7",
       aliases: aliases(),
       deps: deps(),
@@ -59,7 +60,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
   defp docs do
     [
       main: "Geolix.Adapter.MMDB2Precompiled",
-      source_ref: "master",
+      source_ref: "v#{@version}",
       source_url: @url_github
     ]
   end
