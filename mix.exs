@@ -1,6 +1,7 @@
 defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
   use Mix.Project
 
+  @url_changelog "https://hexdocs.pm/geolix_adapter_mmdb2_precompiled/changelog.html"
   @url_github "https://github.com/elixir-geolix/adapter_mmdb2_precompiled"
   @version "0.1.0-dev"
 
@@ -74,8 +75,11 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
   defp package do
     %{
       files: ["CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib"],
-      licenses: ["Apache 2.0"],
-      links: %{"GitHub" => @url_github}
+      licenses: ["Apache-2.0"],
+      links: %{
+        "Changelog" => @url_changelog,
+        "GitHub" => @url_github
+      }
     }
   end
 end
