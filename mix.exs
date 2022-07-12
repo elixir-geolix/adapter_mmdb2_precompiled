@@ -59,6 +59,12 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
 
   defp docs do
     [
+      extras: [
+        "CHANGELOG.md",
+        LICENSE: [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      formatters: ["html"],
       main: "Geolix.Adapter.MMDB2Precompiled",
       source_ref: "v#{@version}",
       source_url: @url_github
