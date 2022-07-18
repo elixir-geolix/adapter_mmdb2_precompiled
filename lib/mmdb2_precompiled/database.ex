@@ -61,7 +61,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
           @doc """
           Returns the metadata information for the database.
           """
-          @spec metadata() :: %MMDB2Decoder.Metadata{}
+          @spec metadata() :: MMDB2Decoder.Metadata.t()
           def metadata, do: unquote(meta_quoted)
         end
       )
