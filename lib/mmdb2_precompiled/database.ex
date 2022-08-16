@@ -3,7 +3,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.Database do
   Base module to extract database information during compilation.
   """
 
-  use Bitwise, only_operators: true
+  import Bitwise
 
   @mmdb2_opts_default Macro.escape(%{
                         double_precision: 8,
