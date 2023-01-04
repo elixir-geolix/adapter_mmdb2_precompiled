@@ -38,7 +38,7 @@ defmodule Geolix.Adapter.MMDB2Precompiled.MixProject do
       {:credo, "~> 1.6", only: :dev, runtime: false},
       {:dialyxir, "~> 1.2", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.14.0", only: :test, runtime: false},
+      {:excoveralls, "~> 0.15.0", only: :test, runtime: false},
       {:geolix, "~> 2.0"},
       {:geolix_testdata, "~> 0.6.0", only: [:bench, :test], runtime: false},
       {:mmdb2_decoder, "~> 3.0"}
